@@ -4,15 +4,15 @@ class VoteCount < ActiveRecord::Base
 
   def vote(username)
     if last_win_at < 6.hours.ago
-      if Vote.where(video_id: self.video_id).find_by_username(username).nil?
-        Vote.create(username: username, video_id: self.video_id)
+      if Vote.where(video_id: self.video_id).find_by_username(username.downcase).nil?
+        Vote.create(username: username.downcase, video_id: self.video_id)
         increment!(:count)
       else
-        self.errors.add(:video_id, "You (#{username}) already voted for this video in this round.")
+        self.errors.add(:video_id, "@#{username}, you already voted for this video in this round.")
         false
       end
     else
-     self.errors.add(:last_win_at, "This video was played less than 6 hours ago.")
+     self.errors.add(:last_win_at, "@#{username}, this video was played less than 6 hours ago.")
       false
     end
   end

@@ -12,7 +12,7 @@ class VideosController < ApplicationController
     if params[:key] == Rails.application.secrets.secret_key_base
       @vc = VoteCount.find_or_create_by(video_id: params[:video_id])
       if @vc.vote(params[:username])
-        render text: "You (#{params[:username]}) voted for #{@vc.video.title}! (Total votes: #{@vc.count})"
+        render text: "@#{params[:username]} voted for #{@vc.video.title}! (Votes: #{@vc.count})"
       else
         render text: @vc.errors.messages.values[0][0], status: 400
       end

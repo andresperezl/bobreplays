@@ -1,3 +1,4 @@
+ruby '2.2.1'
 source 'https://rubygems.org'
 
 
@@ -26,6 +27,7 @@ gem 'httparty'
 gem 'iso8601'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
