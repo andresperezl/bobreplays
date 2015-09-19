@@ -2,6 +2,39 @@
   = stylesheet_link_tag    'home', media: 'all', 'data-turbolinks-track' => true
 - content_for :additional_scripts do
   = javascript_include_tag 'home'
+#optionsWrapper.navbar.navbar-inverse.navbar-fixed-top
+  #optionsContainer.container
+    .navbar-header
+      %a.navbar-brand
+        = image_tag "bob-nav.png", id: "navLogo"
+    #optionsMenu.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li.dropdown{:role => "presentation"}
+          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            Stream/Chat Size Ratio
+            %span.caret
+          %ul.dropdown-menu
+            %li{:onclick => "setRatio(6,6)"}
+              %a{:href => "#"} 1:1
+            %li{:onclick => "setRatio(7,5)"}
+              %a{:href => "#"} 7:5
+            %li{:onclick => "setRatio(8,4)"}
+              %a{:href => "#"} 2:1
+            %li{:onclick => "setRatio(9,3)"}
+              %a{:href => "#"} 3:1
+            %li{:onclick => "setRatio(10,2)"}
+              %a{:href => "#"} 5:1
+            %li{:onclick => "setRatio(11,1)"}
+              %a{:href => "#"} 11:1
+            %li{:onclick => "setRatio(12,0)"}
+              %a{:href => "#"} 1:0 (Hide Chat)
+        %li
+          = link_to "Matches", :matches, target: "_blank"
+      %form.navbar-form.navbar-left
+        .form-group
+          %input#chatOnLeft.form-control{:type => "checkbox"}/
+          %label{:for => "chatOnLeft"} Chat on left side
+
 .container-fluid
   .row
     #ytPlayer.col-md-9

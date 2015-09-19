@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   get 'videos/index'
 
   root 'home#index'
-  get  'matches(/:page(/:filter))', to: 'videos#index'
+  get  'matches(/:page(/:filter))', to: 'videos#index', as: :matches
   get  'vote', to: 'videos#vote'
+  get  'video/playing', to: 'videos#current', defaults: { format: :json }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

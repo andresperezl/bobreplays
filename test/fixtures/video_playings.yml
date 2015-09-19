@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  video_id: 
+  start_time: 2015-09-19 11:00:29
+
+two:
+  video_id: 
+  start_time: 2015-09-19 11:00:29

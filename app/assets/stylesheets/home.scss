@@ -15,6 +15,18 @@ body {
   height: 100% !important;
   padding: 0 !important;
 }
+#optionsWrapper {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+#optionsMenu {
+  width: auto;
+  height: 100%;
+}
+#optionsContainer{
+  pointer-events: auto;
+}
 .container-fluid, .row {
   height: 100% !important;
 }

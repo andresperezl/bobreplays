@@ -20,4 +20,23 @@ class VideosController < ApplicationController
       render nothing: true, status: 200
     end
   end
+
+  def current
+    @vp = VideoPlaying.first
+    if (@vp.start_time + @vp.video.duration.seconds) < Time.now
+      @winner = VoteCount.order(count: :desc).first
+      @vp.video = @winner.video
+      @vp.start_time = Time.now
+      @vp.save
+      @winner.last_win_at = Time.now
+      @winner.save
+      resetCount
+    end
+  end
+
+  private
+    def resetCount
+      VoteCount.all.update_all(count: 0)
+      Vote.all.destroy
+    end
 end
