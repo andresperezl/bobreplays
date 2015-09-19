@@ -1,0 +1,9 @@
+- content_for :additional_css do
+  = stylesheet_link_tag    'home', media: 'all', 'data-turbolinks-track' => true
+- content_for :additional_scripts do
+  = javascript_include_tag 'home'
+.container-fluid
+  .row
+    #ytPlayer.col-md-9
+    %iframe#twitchChat.col-md-3{frameborder: "0", scrolling: "no", src: "http://www.twitch.tv/bobreplays/chat"}
+    
