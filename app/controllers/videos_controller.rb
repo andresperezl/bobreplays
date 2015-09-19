@@ -14,10 +14,10 @@ class VideosController < ApplicationController
       if @vc.vote(params[:username])
         render text: "@#{params[:username]} voted for #{@vc.video.title}! (Votes: #{@vc.count})"
       else
-        render text: @vc.errors.messages.values[0][0], status: 400
+        render text: @vc.errors.messages.values[0][0], status: 200
       end
     else
-      render nothing: true, status: 403
+      render nothing: true, status: 200
     end
   end
 end
