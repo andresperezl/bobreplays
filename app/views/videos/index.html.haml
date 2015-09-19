@@ -16,14 +16,17 @@
     .row
       - video_row.each do |video| 
         .col-md-2
-          .thumbnail
-            = link_to "https://www.youtube.com/watch?v=#{video.videoId}" do
-              = image_tag video.thumbnail, class: "img-responsive"
-            .caption.text-center
-              %h5= video.title
-              %p
-                Duration:
-                = video.formatted_duration
+          .row
+            .col-md-12.thumbnail
+              = link_to "https://www.youtube.com/watch?v=#{video.videoId}" do
+                = image_tag video.thumbnail, class: "img-responsive"
+              .caption.text-center
+                %h5= video.title
+                %p
+                  Duration:
+                  = video.formatted_duration
+          .row
+            .col-md-12.text-center
               %p.vote-code
                 %kbd 
                   !vote
