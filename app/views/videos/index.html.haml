@@ -1,26 +1,33 @@
+- content_for :additional_css do
+  = stylesheet_link_tag    'videos', media: 'all', 'data-turbolinks-track' => true
+- content_for :additional_scripts do
+  = javascript_include_tag 'videos'
 .container-fluid
-.row
-  .col-md-6
-
-.row
-  .col-md-6.col-md-offset-3.text-center
-    = will_paginate @videos, renderer: BootstrapPagination::Rails
-- @videos.each_slice(6) do |video_row|
   .row
-    - video_row.each do |video| 
-      .col-md-2
-        .thumbnail
-          = link_to "https://www.youtube.com/watch?v=#{video.videoId}" do
-            = image_tag video.thumbnail, class: "img-responsive"
-          .caption.text-center
-            %h5= video.title
-            %p
-              Duration:
-              = video.formatted_duration
-            %p
-              %kbd 
-                %kbd !vote
-                = " #{video.id}"
-.row
-  .col-md-6.col-md-offset-3.text-center
-    = will_paginate @videos, renderer: BootstrapPagination::Rails
+    .col-md-6.col-md-offset-3.text-center
+      .input-group
+        %input#filterText.form-control{ type: 'text', placeholder: "Ex. 'TSM' or 'TSM|SKT|World Championship' (without quotes)" }
+        %span.input-group-btn
+          %button#filterBtn.btn.btn-primary{ type: 'button'} Filter
+  .row
+    .col-md-8.col-md-offset-2.text-center
+      = will_paginate @videos, renderer: BootstrapPagination::Rails
+  - @videos.each_slice(6) do |video_row|
+    .row
+      - video_row.each do |video| 
+        .col-md-2
+          .thumbnail
+            = link_to "https://www.youtube.com/watch?v=#{video.videoId}" do
+              = image_tag video.thumbnail, class: "img-responsive"
+            .caption.text-center
+              %h5= video.title
+              %p
+                Duration:
+                = video.formatted_duration
+              %p.vote-code
+                %kbd 
+                  !vote
+                  %kbd= " #{video.id}"
+  .row
+    .col-md-8.col-md-offset-2.text-center
+      = will_paginate @videos, renderer: BootstrapPagination::Rails

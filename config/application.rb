@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Bobreplays
   class Application < Rails::Application
-    Rails.application.config.assets.precompile += %w( home.js home.css )
+    Rails.application.config.assets.precompile += %w( home.js home.css videos.css videos.js )
     config.active_record.raise_in_transactional_callbacks = true
   end
 end

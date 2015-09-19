@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get  'matches(/:page(/:filter))', to: 'videos#index'
+  get  'vote', to: 'videos#vote'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

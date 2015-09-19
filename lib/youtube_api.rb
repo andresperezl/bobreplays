@@ -7,7 +7,7 @@ class YoutubeApi
   YOUTUBE_API_KEY = Rails.application.secrets.youtube_api_key
   BASE_URI = "https://www.googleapis.com/youtube/v3"
   VS_REGEX = /\svs\.?\s/
-
+  NOT_REGEX = /(Teaser|Recap|Mic Check)/
   include HTTParty
   base_uri BASE_URI
 
@@ -24,13 +24,16 @@ class YoutubeApi
     loop do
       response = get("/playlistItems", options)
       result = response.parsed_response
-      items = result["items"].select{ |item| VS_REGEX.match(item["snippet"]["title"]) }
+      items = result["items"].select{ |item| 
+        VS_REGEX.match(item["snippet"]["title"]) && 
+        !NOT_REGEX.match(item["snippet"]["title"]) }
       items.each do |item|
         item_info = item["snippet"]
         title = item_info["title"]
-        thumbnail = item_info["thumbnails"]["default"]["url"]
+        uploaded_on = item_info["publishedAt"]
+        thumbnail = item_info["thumbnails"]["medium"]["url"]
         videoId = item_info["resourceId"]["videoId"]
-        video = Video.create( title: title, videoId: videoId, thumbnail: thumbnail ) unless Video.find_by_videoId(videoId)
+        video = Video.create( title: title, videoId: videoId, thumbnail: thumbnail, uploaded_on: uploaded_on ) unless Video.find_by_videoId(videoId)
         videos[videoId] = video if video
         if videos.keys.size == 50
           get_videos_durations(videos)

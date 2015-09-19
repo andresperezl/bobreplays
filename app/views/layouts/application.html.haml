@@ -6,9 +6,11 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title BoB Replays - Let's watch VODs together!
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material.min.css', medial: 'all', 'data-turbolinks-track' => true
     = content_for(:additional_css)
     = csrf_meta_tags
   %body
     = yield
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js', 'data-turbolinks-track' => true
     = content_for(:additional_scripts)

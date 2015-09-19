@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  videoId_id: 
+  count: 1
+
+two:
+  videoId_id: 
+  count: 1
