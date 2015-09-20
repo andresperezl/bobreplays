@@ -34,6 +34,11 @@ class VideosController < ApplicationController
     end
   end
 
+  def top
+    @vcs = VoteCount.all.order(count: :desc).limit(3)
+    render text: @vcs.each_with_index.map{ |vc, i| "#{ i + 1 }. #{ vc.video.title } (#{ vc.count })"}.join(" | ")
+  end
+
   private
     def resetCount
       VoteCount.all.update_all(count: 0)
