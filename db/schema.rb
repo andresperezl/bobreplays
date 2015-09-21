@@ -11,19 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921162018) do
+ActiveRecord::Schema.define(version: 20150921164906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "video_playings", force: :cascade do |t|
-    t.integer  "video_id"
     t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "video_id"
   end
-
-  add_index "video_playings", ["video_id"], name: "index_video_playings_on_video_id", using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "title"
@@ -36,21 +34,17 @@ ActiveRecord::Schema.define(version: 20150921162018) do
   end
 
   create_table "vote_counts", force: :cascade do |t|
-    t.integer  "video_id"
     t.integer  "count",       default: 0
     t.datetime "last_win_at"
+    t.integer  "video_id"
   end
-
-  add_index "vote_counts", ["video_id"], name: "index_vote_counts_on_video_id", using: :btree
 
   create_table "votes", force: :cascade do |t|
-    t.integer "video_id"
     t.string  "username"
+    t.integer "video_id"
   end
 
-  add_index "votes", ["video_id"], name: "index_votes_on_video_id", using: :btree
-
-  add_foreign_key "video_playings", "videos"
-  add_foreign_key "vote_counts", "videos"
-  add_foreign_key "votes", "videos"
+  add_foreign_key "video_playings", "videos", name: "video_playings_video_id_fk", on_delete: :cascade
+  add_foreign_key "vote_counts", "videos", name: "vote_counts_video_id_fk", on_delete: :cascade
+  add_foreign_key "votes", "videos", name: "votes_video_id_fk", on_delete: :cascade
 end
