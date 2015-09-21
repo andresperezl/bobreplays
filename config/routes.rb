@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get  'matches(/:page(/:filter))', to: 'videos#index', as: :matches
-  get  'vote', to: 'videos#vote'
+  get  'vote/:key', to: 'videos#vote'
   get  'video/playing', to: 'videos#current', defaults: { format: :json }
   get  'top', to: "videos#top", default: { format: :json }
   # The priority is based upon order of creation: first created -> highest priority.

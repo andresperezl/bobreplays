@@ -17,7 +17,7 @@ class VideosController < ApplicationController
         render text: @vc.errors.messages.values[0][0], status: 200
       end
     else
-      render nothing: true, status: 200
+      render nothing: true, status: 400
     end
   end
 
