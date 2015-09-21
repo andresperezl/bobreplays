@@ -6,7 +6,7 @@ class SetForeignKeyDependency < ActiveRecord::Migration
 
     add_column :vote_counts, :video_id, :integer
     add_column :votes, :video_id, :integer
-    ADD_column :video_playings, :video_id, :integer
+    add_column :video_playings, :video_id, :integer
 
     add_foreign_key :vote_counts, :videos, on_delete: :cascade
     add_foreign_key :votes, :videos, on_delete: :cascade
