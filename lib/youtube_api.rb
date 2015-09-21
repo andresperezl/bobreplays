@@ -7,7 +7,7 @@ class YoutubeApi
   YOUTUBE_API_KEY = Rails.application.secrets.youtube_api_key
   BASE_URI = "https://www.googleapis.com/youtube/v3"
   VS_REGEX = /\svs\.?\s/
-  NOT_REGEX = /(Teaser|Recap|Mic Check)/
+  NOT_REGEX = /(teaser|recap|mic check|promotion)/
   include HTTParty
   base_uri BASE_URI
 
@@ -25,8 +25,8 @@ class YoutubeApi
       response = get("/playlistItems", options)
       result = response.parsed_response
       items = result["items"].select{ |item| 
-        VS_REGEX.match(item["snippet"]["title"]) && 
-        !NOT_REGEX.match(item["snippet"]["title"]) }
+        VS_REGEX.match(item["snippet"]["title"].downcase) && 
+        !NOT_REGEX.match(item["snippet"]["title"].downcase) }
       items.each do |item|
         item_info = item["snippet"]
         title = item_info["title"]
