@@ -1,7 +1,7 @@
 require 'iso8601'
 class Video < ActiveRecord::Base
-  has_one :vote_count, dependent: :destroy
-  has_many :votes, dependent: :destroy
+  has_one :vote_count
+  has_many :votes
   default_scope{ order(uploaded_on: :desc) }
   self.per_page = 36
 
