@@ -5,6 +5,7 @@ function onYouTubeIframeAPIReady() {
   getCurrentVideo();
 }
 function getNewVideo(event){
+  // Request the next video when the current one has ended
   if (event.data == YT.PlayerState.ENDED) {
     $.ajax({
       url: "/video/playing",
@@ -38,6 +39,7 @@ function getCurrentVideo(){
           start: offset,
           autoplay: 1
         },
+        // Trigger when the current video has ended
         events: {
           'onStateChange' : getNewVideo
         }
