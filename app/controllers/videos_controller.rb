@@ -28,6 +28,7 @@ class VideosController < ApplicationController
     #Return the current video being played
     @vp = VideoPlaying.first
     #If past beyond the time, get the next video
+    # This call generates a race conditions when the video ends, something to look for in future projects
     if (@vp.start_time + @vp.video.duration.seconds) < Time.now
       @winner = VoteCount.order(count: :desc).first
       @vp.video = @winner.video
