@@ -6,7 +6,9 @@ class YoutubeApi
   LOLESPORTS_UPLOADS = "UUvqRdlKsE5Q8mf8YXbdIJLw"
   YOUTUBE_API_KEY = Rails.application.secrets.youtube_api_key
   BASE_URI = "https://www.googleapis.com/youtube/v3"
+  #Regex used to only get matches and not special content
   VS_REGEX = /\svs\.?\s/
+  #Additional regex filter of content
   NOT_REGEX = /(teaser|recap|mic check|promotion)/
   include HTTParty
   base_uri BASE_URI
@@ -21,6 +23,7 @@ class YoutubeApi
       }
     }
     videos = {}
+    # Loop until there are no more videos
     loop do
       response = get("/playlistItems", options)
       result = response.parsed_response
@@ -44,10 +47,12 @@ class YoutubeApi
         get_videos_durations(videos)
       end
       options[:query][:pageToken] = result["nextPageToken"]
+      # Exit when there are no more vieos
       break if result["nextPageToken"].nil?
     end
   end
-
+  
+  # The video duration does not come with the default snippet so we get it in another request
   def self.get_videos_durations(videos)
     options = {
       query: {
